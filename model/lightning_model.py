@@ -5,21 +5,22 @@ import yaml
 import lightning as L
 from pydantic import BaseModel
 
+from loss import FaceFormerLoss, VocaLoss
+from model.audio2face import Audio2Mesh
+from model.extractor import MFCCExtractor, Wav2VecExtractor
+from model.faceformer import Faceformer
+from model.song2face import Song2Face
+from model.voca import Voca
+# from model.af_model import AFModel
 
-from ..loss import FaceFormerLoss, VocaLoss
-from .voca import Voca
-from .audio2face import Audio2Mesh
-from .song2face import Song2Face
-from .faceformer import Faceformer
-from .af_model import AFModel
-from .extractor import MFCCExtractor, Wav2VecExtractor
-
-from ..utils.renderer import Renderer, FaceMesh, images_to_video, save_audio
+from utils.facemesh import FaceMesh
+from utils.renderer import Renderer, save_audio, images_to_video
 
 
 class ExpConfig(BaseModel):
     # dataset
     batch_size: int
+    num_workers: int
     # model
     modelname: str
     one_hot_size: int
@@ -53,7 +54,7 @@ def get_model(modelname: Literal["voca", "audio2mesh", "song2face", "faceformer"
         "audio2mesh": Audio2Mesh,
         "song2face": Song2Face,
         "faceformer": Faceformer,
-        "af_model": AFModel,
+        # "af_model": AFModel,
     }
     return model_map[modelname]
 

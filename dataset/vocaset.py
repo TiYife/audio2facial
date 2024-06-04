@@ -324,7 +324,7 @@ class ClipVocaSet(Dataset):
 
 
 class VocaDataModule(L.LightningDataModule):
-    def __init__(
+    def     __init__(
         self,
         datapath: str,
         batch_size: int = 32,

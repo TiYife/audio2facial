@@ -1,4 +1,5 @@
 batch_size: 128
+num_workers: 0
 modelname: "audio2mesh"
 vertex_count: 15069 #5023 * 3
 one_hot_size: 12

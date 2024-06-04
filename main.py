@@ -10,4 +10,4 @@ if __name__ == "__main__":
     renderer = Renderer(texture_mesh)
     verts = np.load("assets/verts_sample.npy")
     rendered_images = renderer.render(verts)
-    images_to_video(rendered_images, "output.mp4")
+    images_to_video(rendered_images, "output")

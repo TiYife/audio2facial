@@ -6,3 +6,4 @@ opencv-python
 pyrender
 tensorboard
 numpy
+pydantic
