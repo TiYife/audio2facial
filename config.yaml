@@ -1,6 +1,6 @@
 batch_size: 128
 num_workers: 0
-modelname: "audio2mesh"
+modelname: "voca"
 vertex_count: 15069 #5023 * 3
 one_hot_size: 12
 split_frame: True
@@ -11,3 +11,4 @@ sample_rate: 22000
 n_feature: 32
 out_dim: 52
 win_length: 440 #220*2
+n_emotion_dim: 16
