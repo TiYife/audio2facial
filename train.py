@@ -12,7 +12,7 @@ from lightning.pytorch.callbacks import (
 from lightning.pytorch.loggers import TensorBoardLogger
 
 from dataset.vocaset import VocaDataModule
-from model.lightning_model import Audio2FaceModel, ExpConfig
+from model.lighting_model.voca_lm import Audio2FaceModel, ExpConfig
 
 
 if __name__ == "__main__":
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # training parameters
-    dataset_path = "./trainingdata"
+    dataset_path = "../Data/Voca"
     config = ExpConfig.from_yaml(args.config)
 
     is_transformer = config.modelname == "faceformer"

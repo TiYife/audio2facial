@@ -7,10 +7,10 @@ import lightning as L
 from Nvidia2017.audio2face_nv2017 import Audio2Mesh
 from Nvidia2017.loss_nv2017 import VocaEmotionLoss
 from model.extractor import MFCCExtractor, Wav2VecExtractor
-from utils.config import ExpConfig
+from util.config import ExpConfig
 
-from utils.facemesh import FaceMesh
-from utils.renderer import Renderer, save_audio, images_to_video
+from util.facemesh import FaceMesh
+from util.renderer import Renderer, save_audio, images_to_video
 
 
 def get_extractor(extractor: Literal["mfcc", "wav2vec"]):

@@ -5,7 +5,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 
 from Nvidia2017.dataset_nv2017 import VocaDataModule
 from Nvidia2017.lighting_model_nv_2017 import Audio2FaceModel
-from utils.config import ExpConfig
+from util.config import ExpConfig
 
 # 创建模型对象
 model = Audio2FaceModel.load_from_checkpoint("path/to/your/checkpoint.ckpt")

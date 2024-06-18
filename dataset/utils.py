@@ -1,8 +1,26 @@
+import pickle
+
 import numpy as np
 import librosa
 import matplotlib.pyplot as plt
 import torch
 import torchaudio
+
+def save_pickle(data, pkl_path):
+    with open(pkl_path, "wb") as f:
+        pickle.dump(data, f)
+
+def load_pickle(pkl_path):
+    with open(pkl_path, "rb") as f:
+        data = pickle.load(f, encoding="latin1")
+    return data
+
+def save_npy_mmapped(data, npy_path):
+    np.save(npy_path, data)
+
+def load_npy_mmapped(npy_path):
+    # return np.load(npy_path, mmap_mode="r")
+    return np.load(npy_path, allow_pickle=True)
 
 
 def melspec_torchaudio(

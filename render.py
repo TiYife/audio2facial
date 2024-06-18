@@ -10,7 +10,7 @@ import trimesh
 import cv2
 
 
-from utils.facemesh import FaceMesh
+from util.facemesh import FaceMesh
 
 verts = np.load("verts_sample.npy")
 center = np.mean(verts[0], axis=0)

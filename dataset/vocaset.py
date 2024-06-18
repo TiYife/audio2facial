@@ -1,5 +1,4 @@
 import os
-import pickle
 from typing import TypedDict, Mapping, Literal
 from typing_extensions import Unpack
 from functools import lru_cache
@@ -13,16 +12,7 @@ from torch.utils.data import Dataset, DataLoader
 import lightning as L
 from rich import print
 
-
-def load_pickle(pkl_path):
-    with open(pkl_path, "rb") as f:
-        data = pickle.load(f, encoding="latin1")
-    return data
-
-
-def load_npy_mmapped(npy_path):
-    return np.load(npy_path, mmap_mode="r")
-
+from dataset.utils import load_pickle, load_npy_mmapped
 
 VOCASET_AUDIO_TYPE = Mapping[str, Mapping[str, np.ndarray]]
 VOCASET_VERTS_TYPE = np.ndarray
@@ -77,7 +67,7 @@ class VocaItem(TypedDict):
     feature: torch.Tensor
 
 
-class DataSplitRecorder:
+class VocaSplitRecorder:
     def __init__(self, write: bool = True) -> None:
         self.write = write
         self.train_list = []
@@ -132,7 +122,7 @@ class DataSplitRecorder:
     ):
         save_path = os.path.join(save_path, "split")
         os.makedirs(save_path, exist_ok=False)
-        data_split_recorder = DataSplitRecorder()
+        data_split_recorder = VocaSplitRecorder()
         for clip_name, clip_data in raw_audio.items():
             if clip_name not in subj_seq_to_idx:
                 continue
@@ -217,15 +207,15 @@ class ClipVocaSet(Dataset):
             os.path.join(self.datapath, "subj_seq_to_idx.pkl")
         )
 
-        if not DataSplitRecorder.exists(self.datapath):
+        if not VocaSplitRecorder.exists(self.datapath):
             print("Building dataset...")
-            DataSplitRecorder.build(
+            VocaSplitRecorder.build(
                 raw_audio=self.raw_audio,
                 subj_seq_to_idx=self.wav_seq_to_idx,
                 save_path=self.datapath,
             )
 
-        self.split_recorder = DataSplitRecorder.load(self.datapath)
+        self.split_recorder = VocaSplitRecorder.load(self.datapath)
         self.datalist_raw = self.split_recorder.get_list(phase)
         if self.split_frame:
             self.datalist = self.datalist_raw

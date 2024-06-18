@@ -1,8 +1,8 @@
 import numpy as np
 import cv2
 
-from utils.facemesh import FaceMesh
-from utils.renderer import Renderer, images_to_video
+from util.facemesh import FaceMesh
+from util.renderer import Renderer, images_to_video
 
 
 if __name__ == "__main__":
